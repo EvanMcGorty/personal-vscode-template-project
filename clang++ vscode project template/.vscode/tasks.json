@@ -1,0 +1,47 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "clang-cl Source.cpp /GX /std:c++17 -I C:/boost_1_66_0 -o builds/unoptimized.exe",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "gcc-build",
+            "type": "shell",
+            "command": "g++ Source.cpp -std=c++17 -Os -D _DEBUG -IC:/boost_1_66_0 -o builds/gcc-built.exe",
+            "problemMatcher": []
+        },
+        {
+            "label": "debug build",
+            "type": "shell",
+            "command": "clang-cl -fuse-ld=lld -Z7 -MTd Source.cpp /GX /std:c++17 -D _DEBUG -I C:/boost_1_66_0 -o builds/debug",
+            "problemMatcher": []
+        },
+        {
+            "label": "debug run",
+            "type": "shell",
+            "command": "clang-cl -fuse-ld=lld -Z7 -MTd Source.cpp /GX /std:c++17 -D _DEBUG -I C:/boost_1_66_0 -o builds/debug; start builds/debug",
+            "problemMatcher": []
+        },
+        {
+            "label": "release build",
+            "type": "shell",
+            "command": "clang-cl -fuse-ld=lld Source.cpp /GX /std:c++17 -D NDEBUG -I C:/boost_1_66_0 -Ofast -flto -o builds/optimized.exe",
+            "problemMatcher": []
+        },
+        {
+            "label": "analyze",
+            "type": "shell",
+            "command": "clang --analyze -Xanalyzer -analyzer-output=text -std=c++17 -I C:/boost_1_66_0 Source.cpp",
+            "problemMatcher": []
+        }
+    ]
+}

@@ -1,7 +1,6 @@
-#include"code\Header.h"
+#include"code/run.h"
 
 int main()
 {
-    hello_world();
-    prompt();
+    run();
 }

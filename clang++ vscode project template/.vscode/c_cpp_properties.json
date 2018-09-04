@@ -52,7 +52,8 @@
                 "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/ucrt",
                 "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/shared",
                 "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/winrt",
-                "C:/boost_1_66_0"
+                "C:/boost_1_66_0/include",
+                "C:/expression-evaluator-2.2.0/include"
             ],
             "defines": [
                 "_DEBUG",
@@ -69,7 +70,8 @@
                     "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/ucrt",
                     "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/shared",
                     "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/winrt",
-                    "C:/boost_1_66_0"
+                    "C:/boost_1_66_0/include",
+                    "C:/expression-evaluator-2.2.0/include"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""

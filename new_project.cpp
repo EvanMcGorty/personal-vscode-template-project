@@ -7,13 +7,13 @@ int main()
 {
     std::string possible_errors = "no errors";
     int ret = 0;
+    
+    std::string source_path_name{"project templates/clang++ vscode project template"};
+
+    std::string dest_path_name;
 
     try
     {
-        std::string source_path_name{"project templates/clang++ vscode project template"};
-
-        std::string dest_path_name;
-
         std::cout << "target directory:\n" << std::flush;
 
         std::getline(std::cin,dest_path_name);
@@ -32,9 +32,12 @@ int main()
 
     std::cout << possible_errors << std::endl;
 
-    std::cout << "press enter to continue..." << std::flush;
-    std::string in;
-    std::getline(std::cin,in);
+    system("pause");
+
+    if(ret == 0)
+    {
+        system(("code \"" + dest_path_name + "\"").c_str());
+    }
 
     return ret;
 

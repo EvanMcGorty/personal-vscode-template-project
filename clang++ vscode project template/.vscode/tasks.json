@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "clang-cl Source.cpp /GX /std:c++17 -I D:/lib/expression-evaluator/include -I D:/lib/utils -I C:/WxWidgets-3.1.0/include -I C:/boost_1_66_0/include -o builds/unoptimized.exe",
+            "command": "make CXX=clang-cl MODE=test OUT=builds/unoptomized",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -16,25 +16,25 @@
         {
             "label": "gcc-build",
             "type": "shell",
-            "command": "g++ Source.cpp -std=c++17 -Os -D _DEBUG -ID:/lib/expression-evaluator/include -ID:/lib/utils -IC:/WxWidgets-3.1.0/include -IC:/boost_1_66_0/include -o builds/gcc-built.exe",
+            "command": "make CXX=g++ MODE=test OUT=builds/gcc-built",
             "problemMatcher": []
         },
         {
             "label": "debug build",
             "type": "shell",
-            "command": "clang-cl -fuse-ld=lld -Z7 -MTd Source.cpp /GX /std:c++17 -D _DEBUG -I D:/lib/expression-evaluator/include -I D:/lib/utils -I C:/WxWidgets-3.1.0/include -I C:/boost_1_66_0/include -o builds/debug",
+            "command": "make CXX=clang-cl MODE=debug OUT=builds/debug",
             "problemMatcher": []
         },
         {
             "label": "debug run",
             "type": "shell",
-            "command": "clang-cl -fuse-ld=lld -Z7 -MTd Source.cpp /GX /std:c++17 -D _DEBUG -I D:/lib/expression-evaluator/include -I D:/lib/utils -I C:/WxWidgets-3.1.0/include -I C:/boost_1_66_0/include -o builds/debug; start builds/debug",
+            "command": "make CXX=clang-cl MODE=debug OUT=builds/debug; start builds/debug",
             "problemMatcher": []
         },
         {
             "label": "release build",
             "type": "shell",
-            "command": "clang-cl -fuse-ld=lld Source.cpp /GX /std:c++17 -D NDEBUG -I D:/lib/expression-evaluator/include -I D:/lib/utils -I C:/WxWidgets-3.1.0/include -I C:/boost_1_66_0/include -Ofast -flto -o builds/optimized.exe",
+            "command": "make CXX=clang-cl MODE=fast OUT=builds/optimized",
             "problemMatcher": []
         },
         {

@@ -36,12 +36,6 @@
             "type": "shell",
             "command": "make CXX=clang-cl MODE=fast OUT=builds/optimized",
             "problemMatcher": []
-        },
-        {
-            "label": "analyze",
-            "type": "shell",
-            "command": "clang --analyze -Xanalyzer -analyzer-output=text -std=c++17 -I D:/lib/expression-evaluator/include -I D:/lib/utils -I C:/WxWidgets-3.1.0/include -I C:/boost_1_66_0/include Source.cpp",
-            "problemMatcher": []
         }
     ]
 }

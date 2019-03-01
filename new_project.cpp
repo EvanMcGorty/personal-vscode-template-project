@@ -4,15 +4,15 @@
 namespace fs = std::experimental::filesystem;
 
 //change when you compile if you want set directories
-std::string set_files_origin{""};
-std::string set_files_destination{""};
+std::string set_files_origin{/*enter path here*/ "/personal-vscode-template-project/project-template/"};
+std::string set_files_destination{/*enter path here*/ ""};
 
 int main()
 {
     std::string possible_errors = "no errors";
     int ret = 0;
     
-    std::string source_path_name{set_files_origin + "project templates/clang++ vscode project template"};
+    std::string source_path_name{set_files_origin};
 
     std::string dest_path_name;
 

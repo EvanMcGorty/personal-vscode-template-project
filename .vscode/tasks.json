@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "clang++ new_project.cpp -O3 -std=c++17 -o ../new_project.exe",
+            "command": "clang++ new_project.cpp -O3 -std=c++17 -o ../bin/new_project.exe",
             "problemMatcher": []
         }
     ]

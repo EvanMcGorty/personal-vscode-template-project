@@ -8,7 +8,6 @@
                 "_UNICODE"
             ],
             "windowsSdkVersion": "10.0.17763.0",
-            "compilerPath": "clang",
             "cppStandard": "c++17",
             "intelliSenseMode": "clang-x64"
         }

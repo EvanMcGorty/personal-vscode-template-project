@@ -20,6 +20,12 @@
             "problemMatcher": []
         },
         {
+            "label": "clang-build",
+            "type": "shell",
+            "command": "make CXX=clang++ MODE=test OUT=builds/clang-built",
+            "problemMatcher": []
+        },
+        {
             "label": "debug build",
             "type": "shell",
             "command": "make CXX=clang-cl MODE=debug OUT=builds/debug",

@@ -6,12 +6,18 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "make CXX=clang-cl MODE=test OUT=builds/unoptomized",
+            "command": "make CXX=clang++ MODE=test OUT=builds/unoptomized CLANG_SET_TARGET=x86_64-pc-windows-gnu",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "clang-cl-build",
+            "type": "shell",
+            "command": "make CXX=clang-cl MODE=test OUT=builds/unoptomized",
+            "problemMatcher": []
         },
         {
             "label": "gcc-build",
@@ -22,7 +28,7 @@
         {
             "label": "clang-build",
             "type": "shell",
-            "command": "make CXX=clang++ MODE=test OUT=builds/clang-built",
+            "command": "make CXX=clang++ MODE=test OUT=builds/clang-built CLANG_SET_TARGET=x86_64-pc-windows-gnu",
             "problemMatcher": []
         },
         {
@@ -40,7 +46,7 @@
         {
             "label": "release build",
             "type": "shell",
-            "command": "make CXX=clang-cl MODE=fast OUT=builds/optimized",
+            "command": "make CXX=clang++ MODE=fast OUT=builds/optimized CLANG_SET_TARGET=x86_64-pc-windows-gnu",
             "problemMatcher": []
         }
     ]

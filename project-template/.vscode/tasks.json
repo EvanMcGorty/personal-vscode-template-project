@@ -16,7 +16,7 @@
         {
             "label": "clang-cl-build",
             "type": "shell",
-            "command": "make CXX=clang-cl MODE=test OUT=builds/unoptomized",
+            "command": "make CXX=clang-cl MODE=test OUT=builds/clang-cl-built",
             "problemMatcher": []
         },
         {

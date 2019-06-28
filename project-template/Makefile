@@ -33,7 +33,6 @@ ifeq ($(CXX),clang-cl)
 	FLAGS+=$(foreach dir,$(INCLUDE_PATHS),-I $(dir))
 	LINKING_FLAGS+=$(foreach dir,$(LIBRARY_PATHS),/LIBPATH:$(dir))
 	LINKING_FLAGS+=$(foreach dir,$(LIBRARIES),/IMPLIB:$(dir))
-	LINKING_FLAGS+=/subsystem:windows
 else
 	LINKING_FLAGS+=$(foreach dir,$(LIBRARY_PATHS),-L$(dir))
 	LINKING_FLAGS+=$(foreach dir,$(LIBRARIES),-l$(dir))

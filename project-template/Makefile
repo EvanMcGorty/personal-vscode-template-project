@@ -24,7 +24,7 @@ ifeq ($(CXX),clang-cl)
 	GENERATED_FLAGS+=/GX
 	GENERATED_FLAGS+=$(foreach dir,$(INCLUDE_PATHS),-I $(dir))
 	LINKING_FLAGS+=$(foreach dir,$(LIBRARY_PATHS),/libpath:$(dir))
-	LINKING_FLAGS+=$(foreach dir,$(LIBRARIES),/implib:$(dir))
+	LINKING_FLAGS+=$(foreach dir,$(LIBRARIES),$(dir).lib)
 else
 	LINKING_FLAGS+=$(foreach dir,$(LIBRARY_PATHS),-L$(dir))
 	LINKING_FLAGS+=$(foreach dir,$(LIBRARIES),-l$(dir))

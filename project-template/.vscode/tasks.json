@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "make CXX=clang++ MODE=test OUT=builds/unoptomized CLANG_SET_TARGET=x86_64-pc-windows-gnu",
+            "command": "make CXX=clang++ MODE=test OUT=builds/unoptomized.exe CLANG_SET_TARGET=x86_64-pc-windows-gnu",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -16,38 +16,44 @@
         {
             "label": "clang-cl-build",
             "type": "shell",
-            "command": "make CXX=clang-cl MODE=test OUT=builds/clang-cl-built",
-            "problemMatcher": []
+            "command": "make CXX=clang-cl MODE=test OUT=builds/clang-cl-built.exe",
+            "problemMatcher": [],
+            "group": "build"
         },
         {
             "label": "gcc-build",
             "type": "shell",
-            "command": "make CXX=g++ MODE=test OUT=builds/gcc-built",
-            "problemMatcher": []
+            "command": "make CXX=g++ MODE=test OUT=builds/gcc-built.exe",
+            "problemMatcher": [],
+            "group": "build"
         },
         {
             "label": "clang-build",
             "type": "shell",
-            "command": "make CXX=clang++ MODE=test OUT=builds/clang-built CLANG_SET_TARGET=x86_64-pc-windows-gnu",
-            "problemMatcher": []
+            "command": "make CXX=clang++ MODE=test OUT=builds/clang-built.exe CLANG_SET_TARGET=x86_64-pc-windows-gnu",
+            "problemMatcher": [],
+            "group": "build"
         },
         {
             "label": "debug build",
             "type": "shell",
-            "command": "make CXX=clang-cl MODE=debug OUT=builds/debug",
-            "problemMatcher": []
+            "command": "make CXX=clang-cl MODE=debug OUT=builds/debug.exe",
+            "problemMatcher": [],
+            "group": "build"
         },
         {
             "label": "debug run",
             "type": "shell",
-            "command": "make CXX=clang-cl MODE=debug OUT=builds/debug; start builds/debug",
-            "problemMatcher": []
+            "command": "make CXX=clang-cl MODE=debug OUT=builds/debug.exe; start builds/debug",
+            "problemMatcher": [],
+            "group": "build"
         },
         {
             "label": "release build",
             "type": "shell",
-            "command": "make CXX=clang++ MODE=fast OUT=builds/optimized CLANG_SET_TARGET=x86_64-pc-windows-gnu",
-            "problemMatcher": []
+            "command": "make CXX=clang++ MODE=fast OUT=builds/optimized.exe CLANG_SET_TARGET=x86_64-pc-windows-gnu",
+            "problemMatcher": [],
+            "group": "build"
         }
     ]
 }

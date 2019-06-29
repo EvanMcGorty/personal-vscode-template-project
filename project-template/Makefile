@@ -1,56 +1,52 @@
-#the variables VERSION, FLAGS, INCLUDE_PATHS, MODE, CLANG_SET_TARGET, SOURCE, OUT, LINKER, and CXX may optionally be specified at the command line.
+#the variables VERSION, GENERATED_FLAGS, INCLUDE_PATHS, MODE, CLANG_SET_TARGET, SOURCE, OUT, LINKER, and CXX may optionally be specified at the command line.
 #when a linker is specified, compilation and linking will be done separately
 
 #the following lines assign default values for variables
-ifndef VERSION
-	VERSION=c++17
-endif
-ifndef SOURCE
-	SOURCE=Source.cpp
-endif
-ifndef MODE
-	MODE=test
-endif
-ifndef CXX
-	CXX=clang++
-endif
-ifndef OUT
-	OUT=a
-endif
+VERSION=c++17
+SOURCE=Source.cpp
+MODE=test
+CXX=clang++
+OUT=builds/a.exe
 
 
 #the following lines are the only ones meant to be edited.
-INCLUDE_PATHS+=
-LIBRARY_PATHS+=
-LIBRARIES+=
-SOURCE+=
+override INCLUDE_PATHS+=
+override LIBRARY_PATHS+=
+override LIBRARIES+=
+override SOURCE+=
 
+
+GENERATED_FLAGS+=$(FLAGS)
 
 
 ifeq ($(CXX),clang-cl)
-	FLAGS+=/std:$(VERSION)
-	FLAGS+=/GX
-	FLAGS+=$(foreach dir,$(INCLUDE_PATHS),-I $(dir))
-	LINKING_FLAGS+=$(foreach dir,$(LIBRARY_PATHS),/LIBPATH:$(dir))
-	LINKING_FLAGS+=$(foreach dir,$(LIBRARIES),/IMPLIB:$(dir))
+	GENERATED_FLAGS+=/std:$(VERSION)
+	GENERATED_FLAGS+=/GX
+	GENERATED_FLAGS+=$(foreach dir,$(INCLUDE_PATHS),-I $(dir))
+	LINKING_FLAGS+=$(foreach dir,$(LIBRARY_PATHS),/libpath:$(dir))
+	LINKING_FLAGS+=$(foreach dir,$(LIBRARIES),/implib:$(dir))
 else
 	LINKING_FLAGS+=$(foreach dir,$(LIBRARY_PATHS),-L$(dir))
 	LINKING_FLAGS+=$(foreach dir,$(LIBRARIES),-l$(dir))
-	FLAGS+=$(foreach dir,$(INCLUDE_PATHS),-I$(dir))
-	FLAGS+=-std=$(VERSION)
+	GENERATED_FLAGS+=$(foreach dir,$(INCLUDE_PATHS),-I$(dir))
+	GENERATED_FLAGS+=-std=$(VERSION)
+endif
+
+ifeq ($(CXX),clang++)
+	GENERATED_FLAGS+=-Xclang -flto-visibility-public-std
 endif
 
 ifdef CLANG_SET_TARGET
 ifeq ($(CXX),clang-cl)
-	FLAGS+=--target=$(CLANG_SET_TARGET)
+	GENERATED_FLAGS+=--target=$(CLANG_SET_TARGET)
 else
-	FLAGS+=-target $(CLANG_SET_TARGET)
+	GENERATED_FLAGS+=-target $(CLANG_SET_TARGET)
 endif
 endif
 
 
 ifeq ($(MODE),test)
-	FLAGS+=-Os
+	GENERATED_FLAGS+=-Os
 else ifeq ($(MODE),debug)
 	DEBUG_SETTINGS=-fuse-ld=lld -Z7 -MTd
 ifneq ($(CXX),clang-cl)
@@ -58,8 +54,8 @@ $(error can only debug with clang-cl)
 endif
 
 else ifeq ($(MODE),fast)
-	FLAGS+=-D NDEBUG
-	FLAGS+=-Ofast
+	GENERATED_FLAGS+=-D NDEBUG
+	GENERATED_FLAGS+=-Ofast
 endif
 
 
@@ -67,14 +63,14 @@ all:
 ifeq ($(CXX),clang-cl)
 
 ifdef LINKER
-	$(error cannot link separately with clang-cl)
+	$(error can only debug with clang-cl)
 endif
-	$(CXX) $(DEBUG_SETTINGS) $(SOURCE) $(FLAGS) -o $(OUT) /link $(LINKING_FLAGS)
+	$(CXX) $(DEBUG_SETTINGS) $(SOURCE) $(GENERATED_FLAGS) -o $(OUT) /link $(LINKING_FLAGS)
 else
 ifdef LINKER
-	$(CXX) -target x86_64-pc-windows-gnu $(SOURCE) -c $(DEBUG_SETTINGS) $(FLAGS) -o builds/temp_unlinked_binary.o
+	$(CXX) -c $(DEBUG_SETTINGS) $(SOURCE) $(GENERATED_FLAGS) -o builds/temp_unlinked_binary.o
 	$(LINKER) builds/temp_unlinked_binary.o $(LINKING_FLAGS) -o $(OUT)
 else
-	$(CXX) $(DEBUG_SETTINGS) $(SOURCE) $(FLAGS) -o $(OUT) $(LINKING_FLAGS)
+	$(CXX) $(DEBUG_SETTINGS) $(SOURCE) $(GENERATED_FLAGS) -o $(OUT) $(LINKING_FLAGS)
 endif
 endif

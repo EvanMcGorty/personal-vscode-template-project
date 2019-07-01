@@ -1,7 +1,7 @@
 #the variables VERSION, GENERATED_FLAGS, INCLUDE_PATHS, MODE, CLANG_SET_TARGET, SOURCE, OUT, LINKER, and CXX may optionally be specified at the command line.
 #when a linker is specified, compilation and linking will be done separately
 
-#the following lines assign default values for variables
+#the following lines assign default values for variables. they may be edited.
 VERSION=c++17
 SOURCE=Source.cpp
 MODE=test
@@ -9,7 +9,7 @@ CXX=clang++
 OUT=builds/a.exe
 
 
-#the following lines are the only ones meant to be edited.
+#the following lines may be edited.
 override INCLUDE_PATHS+=
 override LIBRARY_PATHS+=
 override LIBRARIES+=
@@ -20,12 +20,20 @@ GENERATED_FLAGS+=$(FLAGS)
 
 
 ifeq ($(CXX),clang-cl)
+
+	#the following line may be edited.
+	override LIBRARY_PATHS+=
+
 	GENERATED_FLAGS+=/std:$(VERSION)
 	GENERATED_FLAGS+=/GX
 	GENERATED_FLAGS+=$(foreach dir,$(INCLUDE_PATHS),-I $(dir))
 	LINKING_FLAGS+=$(foreach dir,$(LIBRARY_PATHS),/libpath:$(dir))
 	LINKING_FLAGS+=$(foreach dir,$(LIBRARIES),$(dir).lib)
 else
+
+	#the following line may be edited.
+	override LIBRARY_PATHS+=
+
 	LINKING_FLAGS+=$(foreach dir,$(LIBRARY_PATHS),-L$(dir))
 	LINKING_FLAGS+=$(foreach dir,$(LIBRARIES),-l$(dir))
 	GENERATED_FLAGS+=$(foreach dir,$(INCLUDE_PATHS),-I$(dir))
@@ -34,6 +42,17 @@ endif
 
 ifeq ($(CXX),clang++)
 	GENERATED_FLAGS+=-Xclang -flto-visibility-public-std
+
+	#the following line may be edited.
+	override LIBRARY_PATHS+=
+
+endif
+
+ifeq ($(CXX),g++)
+
+	#the following line may be edited.
+	override LIBRARY_PATHS+=
+	
 endif
 
 ifdef CLANG_SET_TARGET

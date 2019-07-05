@@ -82,7 +82,7 @@ all:
 ifeq ($(CXX),clang-cl)
 
 ifdef LINKER
-	$(error can only debug with clang-cl)
+	$(error cannot link separately when compiling with clang-cl)
 endif
 	$(CXX) $(DEBUG_SETTINGS) $(SOURCE) $(GENERATED_FLAGS) -o $(OUT) /link $(LINKING_FLAGS)
 else

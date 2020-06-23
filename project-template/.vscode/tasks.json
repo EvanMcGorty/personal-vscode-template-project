@@ -1,7 +1,4 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
     "tasks": [
         {
             "label": "build",
@@ -12,6 +9,13 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "make CXX=clang++ MODE=test OUT=builds/unoptomized.exe CLANG_SET_TARGET=x86_64-pc-windows-gnu; start builds/unoptomized",
+            "problemMatcher": [],
+            "group": "build"
         },
         {
             "label": "clang-cl-build",

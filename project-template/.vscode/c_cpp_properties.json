@@ -1,16 +1,15 @@
 {
     "configurations": [
         {
-            "name": "clang",
+            "name": "main",
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
             ],
             "windowsSdkVersion": "10.0.17763.0",
-            "cppStandard": "c++17",
+            "cppStandard": "c++20",
             "intelliSenseMode": "clang-x64"
         }
-    ],
-    "version": 4
+    ]
 }

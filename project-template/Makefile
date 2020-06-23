@@ -2,7 +2,7 @@
 #when a linker is specified, compilation and linking will be done separately
 
 #the following lines assign default values for variables. they may be edited.
-VERSION=c++17
+VERSION=c++20
 SOURCE=Source.cpp
 MODE=test
 CXX=clang++
